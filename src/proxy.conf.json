@@ -1,0 +1,11 @@
+{
+  "/api": {
+    "target": "https://rickandmortyapi.com/api",
+    "secure": false,
+    "pathRewrite": {
+      "^/api": ""
+    },
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

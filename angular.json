@@ -70,7 +70,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "rick-and-morty:build"
+            "browserTarget": "rick-and-morty:build",
+            "proxyConfig": "src/proxy.conf.json"
           },
           "configurations": {
             "production": {
