@@ -9,22 +9,43 @@ import { HeaderComponent } from './components/header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [HeaderComponent],
   imports: [
+    // Modules
     CommonModule,
+    RouterModule,
+    // Material
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    RouterModule,
+    MatCardModule,
+    MatGridListModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
   ],
   exports: [
+    // Modules
+    CommonModule,
+    RouterModule,
+    // Components
     HeaderComponent,
+    // Material
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    RouterModule,
+    MatCardModule,
+    MatGridListModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class SharedModule {}
