@@ -1,7 +1,7 @@
 <mat-progress-spinner *ngIf="loading" mode="indeterminate"></mat-progress-spinner>
 
 
-<div class="characters">
+<div *ngIf="!loading" class="characters">
   <mat-card *ngFor="let item of dataSource.results">
     <mat-card-header>
       <img (click)="detail(item)" mat-card-avatar [src]="item.image" [alt]="item.name">
@@ -20,7 +20,7 @@
 
 
 <mat-card>
-  <mat-paginator [length]="dataSource.info.count" [pageSize]="20" (page)="pageEvent = $event; loadTable();"
+  <mat-paginator [length]="dataSource?.info.count" [pageSize]="20" (page)="pageEvent = $event; loadTable();"
     showFirstLastButtons>
   </mat-paginator>
 </mat-card>

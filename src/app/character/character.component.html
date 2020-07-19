@@ -1,1 +1,2 @@
-<app-list></app-list>
+<app-filter (filterChanged)="filterChanged = $event"></app-filter>
+<app-list [request]="filterChanged"></app-list>

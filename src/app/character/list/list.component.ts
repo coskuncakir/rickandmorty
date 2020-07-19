@@ -1,4 +1,12 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { CharacterService } from '../../core/services';
 import { Subscription } from 'rxjs';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
@@ -9,7 +17,7 @@ import { DetailComponent } from '../detail/detail.component';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
-export class ListComponent implements OnInit, OnDestroy {
+export class ListComponent implements OnInit, OnDestroy, OnChanges {
   constructor(
     private characterService: CharacterService,
     public dialog: MatDialog
@@ -30,12 +38,18 @@ export class ListComponent implements OnInit, OnDestroy {
   subscription: Subscription = null;
   loading = false;
   pageEvent: PageEvent;
-  request = {};
+  @Input() request = {};
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   ngOnInit(): void {
     this.loadTable();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.request.currentValue !== changes.request.previousValue) {
+      this.loadTable();
+    }
   }
 
   loadTable(): void {
