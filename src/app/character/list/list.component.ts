@@ -1,16 +1,19 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { CharacterService } from '../../core/services';
 import { Subscription } from 'rxjs';
-import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
+import { DetailComponent } from '../detail/detail.component';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit, OnDestroy {
-  constructor(private characterService: CharacterService) {}
+  constructor(
+    private characterService: CharacterService,
+    public dialog: MatDialog
+  ) {}
 
   displayedColumns: string[] = [
     'id',
@@ -25,19 +28,20 @@ export class ListComponent implements OnInit, OnDestroy {
 
   dataSource = null;
   subscription: Subscription = null;
-  loading = true;
+  loading = false;
   pageEvent: PageEvent;
+  request = {};
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   ngOnInit(): void {
-    this.getCharacters();
+    this.loadTable();
   }
 
-  getCharacters(): void {
+  loadTable(): void {
+    this.loading = true;
     this.subscription = this.characterService
-      .characters()
+      .characters(this.request, this.pageEvent)
       .subscribe((response) => {
         this.dataSource = response;
         this.loading = false;
@@ -50,6 +54,12 @@ export class ListComponent implements OnInit, OnDestroy {
 
   location(url: string): void {
     console.log(url);
+  }
+
+  detail(item: any): void {
+    this.dialog.open(DetailComponent, {
+      data: item,
+    });
   }
 
   ngOnDestroy(): void {

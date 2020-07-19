@@ -1,72 +1,26 @@
 <mat-progress-spinner *ngIf="loading" mode="indeterminate"></mat-progress-spinner>
 
-<div *ngIf="!loading" class="mat-elevation-z8">
 
-  <table mat-table [dataSource]="dataSource.results">
-
-    <!-- No Column -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef>ID</th>
-      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-    </ng-container>
-
-    <!-- Avatar Column -->
-    <ng-container matColumnDef="avatar">
-      <th mat-header-cell *matHeaderCellDef>Avatar</th>
-      <td mat-cell *matCellDef="let element">
-        <img mat-card-avatar [src]="element.image" [alt]="element.name">
-      </td>
-    </ng-container>
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-    </ng-container>
-
-    <!-- Gender Column -->
-    <ng-container matColumnDef="gender">
-      <th mat-header-cell *matHeaderCellDef>Gender</th>
-      <td mat-cell *matCellDef="let element">{{ element.gender }}</td>
-    </ng-container>
-
-    <!-- Species Column -->
-    <ng-container matColumnDef="species">
-      <th mat-header-cell *matHeaderCellDef>Species</th>
-      <td mat-cell *matCellDef="let element">{{ element.species }}</td>
-    </ng-container>
-
-    <!-- Status Column -->
-    <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef>Status</th>
-      <td mat-cell *matCellDef="let element">{{ element.status }}</td>
-    </ng-container>
-
-    <!-- Origin Column -->
-    <ng-container matColumnDef="origin">
-      <th mat-header-cell *matHeaderCellDef>Origin</th>
-      <td mat-cell *matCellDef="let element">
-        <button (click)="origin(element.origin.url)" mat-button color="primary">
-          {{ element.origin.name }}
-        </button>
-      </td>
-    </ng-container>
-
-    <!-- Location Column -->
-    <ng-container matColumnDef="location">
-      <th mat-header-cell *matHeaderCellDef>Location</th>
-      <td mat-cell *matCellDef="let element">
-        <button (click)="location(element.location.url)" mat-button color="primary">
-          {{ element.location.name }}
-        </button>
-      </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
-
-  <mat-paginator [length]="dataSource.info.count" [pageSize]="20" [pageSizeOptions]="[5, 10, 20]"
-    (page)="pageEvent = $event" showFirstLastButtons>
-  </mat-paginator>
+<div class="characters">
+  <mat-card *ngFor="let item of dataSource.results">
+    <mat-card-header>
+      <img (click)="detail(item)" mat-card-avatar [src]="item.image" [alt]="item.name">
+      <mat-card-title>{{ item.name }}</mat-card-title>
+      <mat-card-subtitle>{{ item.species }} - {{ item.gender}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <p>Status: {{ item.status }}</p>
+      <p>Origin: {{ item.origin.name }}</p>
+      <p>Location: {{ item.location.name }}</p>
+      <p *ngIf="item.type">Type: {{ item.type }}</p>
+    </mat-card-content>
+  </mat-card>
 </div>
+
+
+<mat-card>
+  <mat-paginator [length]="dataSource.info.count" [pageSize]="20" (page)="pageEvent = $event; loadTable();"
+    showFirstLastButtons>
+  </mat-paginator>
+</mat-card>

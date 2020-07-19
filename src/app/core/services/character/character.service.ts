@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 
@@ -9,7 +9,11 @@ import { environment } from '../../../../environments/environment';
 export class CharacterService {
   constructor(protected http: HttpClient) {}
 
-  characters(): Observable<any> {
-    return this.http.get(environment.api + '/character');
+  characters(request: any, params: any): Observable<any> {
+    const httpParams = {
+      params: new HttpParams().set('page', params ? params.pageIndex + 1 : 1),
+    };
+
+    return this.http.get(environment.api + '/character/', httpParams);
   }
 }

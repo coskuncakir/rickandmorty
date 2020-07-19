@@ -14,6 +14,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [HeaderComponent],
@@ -30,6 +32,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatTableModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
+    MatDialogModule,
+    MatDividerModule,
   ],
   exports: [
     // Modules
@@ -46,6 +50,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatTableModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
+    MatDialogModule,
+    MatDividerModule,
   ],
 })
 export class SharedModule {}
