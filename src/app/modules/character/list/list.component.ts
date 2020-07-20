@@ -7,7 +7,7 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
-import { CharacterService } from '../../core/services';
+import { CharacterService } from '../../../core/services';
 import { Subscription } from 'rxjs';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
