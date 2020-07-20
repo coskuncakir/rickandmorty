@@ -7,9 +7,9 @@
         </path>
       </svg>
     </button>
-    <span class="example-spacer"></span>
-    <button mat-button [routerLink]="['/character']">Characters</button>
-    <button mat-button>Locations</button>
-    <button mat-button>Episodes</button>
+    <span class="spacer"></span>
+    <button mat-button [routerLink]="['/character']" routerLinkActive="active">Characters</button>
+    <button mat-button [routerLink]="['/location']" routerLinkActive="active">Locations</button>
+    <button mat-button [routerLink]="['/episode']" routerLinkActive="active">Episodes</button>
   </mat-toolbar>
 </p>

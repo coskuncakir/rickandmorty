@@ -7,23 +7,21 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
-import { CharacterService } from '../../../core/services';
+import { LocationService } from '../../../core/services';
 import { Subscription } from 'rxjs';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatDialog } from '@angular/material/dialog';
-import { DetailComponent } from '../detail/detail.component';
+
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit, OnDestroy, OnChanges {
-  constructor(
-    private characterService: CharacterService,
-    public dialog: MatDialog
-  ) {}
+  constructor(private locationService: LocationService) {}
 
-  characters = null;
+  displayedColumns = ['id', 'name', 'type', 'dimension'];
+
+  locations = null;
   subscription: Subscription = null;
   loading = false;
   pageEvent: PageEvent;
@@ -43,18 +41,12 @@ export class ListComponent implements OnInit, OnDestroy, OnChanges {
 
   loadTable(): void {
     this.loading = true;
-    this.subscription = this.characterService
-      .characters(this.request, this.pageEvent)
+    this.subscription = this.locationService
+      .locations(this.request, this.pageEvent)
       .subscribe((response) => {
-        this.characters = response;
+        this.locations = response;
         this.loading = false;
       });
-  }
-
-  detail(item: any): void {
-    this.dialog.open(DetailComponent, {
-      data: item,
-    });
   }
 
   ngOnDestroy(): void {

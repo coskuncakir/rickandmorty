@@ -14,6 +14,13 @@ const routes: Routes = [
         (m) => m.CharacterModule
       ),
   },
+  {
+    path: 'location',
+    loadChildren: () =>
+      import('./modules/location/location.module').then(
+        (m) => m.LocationModule
+      ),
+  },
 ];
 
 @NgModule({

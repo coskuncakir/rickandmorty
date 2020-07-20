@@ -2,7 +2,7 @@
 
 
 <div *ngIf="!loading" class="characters">
-  <mat-card *ngFor="let item of dataSource.results">
+  <mat-card *ngFor="let item of characters.results">
     <mat-card-header>
       <img (click)="detail(item)" mat-card-avatar [src]="item.image" [alt]="item.name">
       <mat-card-title>{{ item.name }}</mat-card-title>
@@ -20,7 +20,7 @@
 
 
 <mat-card>
-  <mat-paginator [length]="dataSource?.info.count" [pageSize]="20" (page)="pageEvent = $event; loadTable();"
+  <mat-paginator [length]="characters?.info.count" [pageSize]="20" (page)="pageEvent = $event; loadTable();"
     showFirstLastButtons>
   </mat-paginator>
 </mat-card>
