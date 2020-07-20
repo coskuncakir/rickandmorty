@@ -1,6 +1,7 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Filter</mat-card-title>
+    <mat-card-title>Filter characters</mat-card-title>
+    <button mat-button (click)="clearFilter()">Clear Filter</button>
   </mat-card-header>
   <mat-card-content>
     <div class="filter-form-params">
@@ -27,6 +28,16 @@
         <mat-select [(ngModel)]="formParams.gender" (ngModelChange)="applyFilter()">
           <mat-option *ngFor="let gender of genderOptions | keyvalue" [value]="gender.key">
             {{ gender.value }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Species -->
+      <mat-form-field appearance="outline">
+        <mat-label>Species</mat-label>
+        <mat-select [(ngModel)]="formParams.species" (ngModelChange)="applyFilter()">
+          <mat-option *ngFor="let species of speciesOptions | keyvalue" [value]="species.key">
+            {{ species.value }}
           </mat-option>
         </mat-select>
       </mat-form-field>

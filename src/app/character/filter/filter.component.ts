@@ -24,10 +24,27 @@ export class FilterComponent implements OnInit {
     unknown: 'Unknown',
   };
 
-  formParams = {
+  speciesOptions = {
+    humanoid: 'Humanoid',
+    alien: 'Alien',
+    unknown: 'unknown',
+    human: 'Human',
+    poopybutthole: 'Poopybutthole',
+    mytholog: 'Mytholog',
+    animal: 'Animal',
+    vampire: 'Vampire',
+    robot: 'Robot',
+  };
+
+  options = {
     name: '',
     status: '',
     gender: '',
+    species: '',
+  };
+
+  formParams = {
+    ...this.options,
   };
 
   applyFilter(): void {
@@ -45,7 +62,18 @@ export class FilterComponent implements OnInit {
       params.gender = this.formParams.gender;
     }
 
+    if (this.formParams.species) {
+      params.species = this.formParams.species;
+    }
+
     this.filterChanged.next(params);
+  }
+
+  clearFilter(): void {
+    this.formParams = {
+      ...this.options,
+    };
+    this.applyFilter();
   }
 
   ngOnInit(): void {}
