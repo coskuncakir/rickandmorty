@@ -4,6 +4,7 @@ import { GlobalErrorHandler } from './services/global-error-handler.service';
 import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MENU } from './configs';
 
 @NgModule({
   imports: [HttpClientModule, BrowserAnimationsModule, MatSnackBarModule],
@@ -15,6 +16,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
       useClass: HttpErrorInterceptor,
       multi: true,
     },
+    { provide: 'MENU', useValue: MENU },
   ],
 })
 export class CoreModule {}

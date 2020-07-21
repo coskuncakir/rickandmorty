@@ -1,7 +1,7 @@
 <mat-progress-spinner *ngIf="loading" mode="indeterminate"></mat-progress-spinner>
 
 <div class="mat-elevation-z8">
-  <table mat-table [dataSource]="episodes?.results">
+  <table mat-table [dataSource]="episodes?.results" class="table-responsive">
 
     <!-- ID Column -->
     <ng-container matColumnDef="id">

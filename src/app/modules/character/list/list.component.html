@@ -1,21 +1,23 @@
 <mat-progress-spinner *ngIf="loading" mode="indeterminate"></mat-progress-spinner>
 
+<div *ngIf="characters?.results" class="row">
+  <div class="col-lg-4 col-xl-3 col-md-6 character" *ngFor="let item of characters.results">
+    <mat-card>
+      <mat-card-header>
+        <img (click)="detail(item)" mat-card-avatar [src]="item.image" [alt]="item.name">
+        <mat-card-title>{{ item.name }}</mat-card-title>
+        <mat-card-subtitle>{{ item.species }} - {{ item.gender}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <p>Status: {{ item.status }}</p>
+        <p>Origin: {{ item.origin.name }}</p>
+        <p>Location: {{ item.location.name }}</p>
+        <p *ngIf="item.type">Type: {{ item.type }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
 
-<div *ngIf="characters?.results" class="characters">
-  <mat-card *ngFor="let item of characters.results">
-    <mat-card-header>
-      <img (click)="detail(item)" mat-card-avatar [src]="item.image" [alt]="item.name">
-      <mat-card-title>{{ item.name }}</mat-card-title>
-      <mat-card-subtitle>{{ item.species }} - {{ item.gender}}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-divider></mat-divider>
-    <mat-card-content>
-      <p>Status: {{ item.status }}</p>
-      <p>Origin: {{ item.origin.name }}</p>
-      <p>Location: {{ item.location.name }}</p>
-      <p *ngIf="item.type">Type: {{ item.type }}</p>
-    </mat-card-content>
-  </mat-card>
 </div>
 
 

@@ -1,7 +1,30 @@
-.spacer {
-  flex: 1 1 auto;
+nav {
+  display: none;
+}
+
+.mat-toolbar {
+  margin-bottom: 24px;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
 }
 
 button.active {
   color: yellow
+}
+
+@media (min-width: 768px) {
+  nav {
+    display: block;
+  }
+
+  .mobile-menu {
+    display: none;
+  }
 }

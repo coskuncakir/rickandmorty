@@ -22,6 +22,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [HeaderComponent, CharactersDialogComponent],
@@ -45,6 +48,9 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatInputModule,
     MatSelectModule,
     MatBadgeModule,
+    MatMenuModule,
+    MatSidenavModule,
+    MatListModule,
   ],
   exports: [
     // Modules
@@ -69,6 +75,9 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatInputModule,
     MatSelectModule,
     MatBadgeModule,
+    MatMenuModule,
+    MatSidenavModule,
+    MatListModule,
   ],
 })
 export class SharedModule {}

@@ -1,11 +1,19 @@
-<p>
-  <mat-toolbar color="primary">
-    <a [routerLink]="['/']">
+<mat-toolbar color="primary">
+  <div class="container">
+    <a [routerLink]="['/']" class="logo">
       <img src="assets/images/logo.svg" alt="logo" height="40" />
     </a>
-    <span class="spacer"></span>
-    <button mat-button [routerLink]="['/character']" routerLinkActive="active">Characters</button>
-    <button mat-button [routerLink]="['/location']" routerLinkActive="active">Locations</button>
-    <button mat-button [routerLink]="['/episode']" routerLinkActive="active">Episodes</button>
-  </mat-toolbar>
-</p>
+    <nav>
+      <button *ngFor="let item of MENU" mat-button [routerLink]="[item.path]"
+        routerLinkActive="active">{{ item.name }}</button>
+    </nav>
+    <div class="mobile-menu">
+      <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button *ngFor="let item of MENU" [routerLink]="[item.path]" mat-menu-item>{{ item.name }}</button>
+      </mat-menu>
+    </div>
+  </div>
+</mat-toolbar>
