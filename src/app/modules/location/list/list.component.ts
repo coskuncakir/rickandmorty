@@ -11,16 +11,20 @@ import { LocationService } from '../../../core/http';
 import { Subscription } from 'rxjs';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { finalize } from 'rxjs/operators';
-
+import { MatDialog } from '@angular/material/dialog';
+import { ResidentsComponent } from '../residents/residents.component';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit, OnDestroy, OnChanges {
-  constructor(private locationService: LocationService) {}
+  constructor(
+    private locationService: LocationService,
+    public dialog: MatDialog
+  ) {}
 
-  displayedColumns = ['id', 'name', 'type', 'dimension'];
+  displayedColumns = ['id', 'name', 'type', 'dimension', 'residents'];
 
   locations = null;
   subscription: Subscription = null;
@@ -50,6 +54,12 @@ export class ListComponent implements OnInit, OnDestroy, OnChanges {
         this.locations = response;
         this.loading = false;
       });
+  }
+
+  residents(location): void {
+    this.dialog.open(ResidentsComponent, {
+      data: location,
+    });
   }
 
   ngOnDestroy(): void {
