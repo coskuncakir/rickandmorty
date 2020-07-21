@@ -7,9 +7,10 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
-import { LocationService } from '../../../core/services';
+import { LocationService } from '../../../core/http';
 import { Subscription } from 'rxjs';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-list',
@@ -41,8 +42,10 @@ export class ListComponent implements OnInit, OnDestroy, OnChanges {
 
   loadTable(): void {
     this.loading = true;
+    this.locations = null;
     this.subscription = this.locationService
       .locations(this.request, this.pageEvent)
+      .pipe(finalize(() => (this.loading = false)))
       .subscribe((response) => {
         this.locations = response;
         this.loading = false;

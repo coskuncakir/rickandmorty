@@ -1,7 +1,7 @@
 <mat-progress-spinner *ngIf="loading" mode="indeterminate"></mat-progress-spinner>
 
 
-<div *ngIf="!loading" class="characters">
+<div *ngIf="characters?.results" class="characters">
   <mat-card *ngFor="let item of characters.results">
     <mat-card-header>
       <img (click)="detail(item)" mat-card-avatar [src]="item.image" [alt]="item.name">

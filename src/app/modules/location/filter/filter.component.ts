@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { IReqLocations } from 'src/app/core/services/location/location.interface';
+import { IReqLocations } from 'src/app/core/http/location/location.interface';
 
 @Component({
   selector: 'app-filter',

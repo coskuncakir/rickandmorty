@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { IReqCharacters } from 'src/app/core/services/character/character.interface';
+import { IReqCharacters } from 'src/app/core/http/character/character.interface';
 
 @Component({
   selector: 'app-filter',

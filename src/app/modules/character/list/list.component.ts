@@ -7,11 +7,12 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
-import { CharacterService } from '../../../core/services';
+import { CharacterService } from '../../../core/http';
 import { Subscription } from 'rxjs';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { DetailComponent } from '../detail/detail.component';
+import { finalize } from 'rxjs/operators';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -43,8 +44,10 @@ export class ListComponent implements OnInit, OnDestroy, OnChanges {
 
   loadTable(): void {
     this.loading = true;
+    this.characters = null;
     this.subscription = this.characterService
       .characters(this.request, this.pageEvent)
+      .pipe(finalize(() => (this.loading = false)))
       .subscribe((response) => {
         this.characters = response;
         this.loading = false;
