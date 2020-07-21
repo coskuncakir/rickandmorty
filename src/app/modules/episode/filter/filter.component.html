@@ -1,0 +1,24 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Filter Episodes</mat-card-title>
+    <button mat-button (click)="clearFilter()">Clear Filter</button>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="filter-form-params">
+      <!-- Name -->
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput type="text" name="name" [(ngModel)]="formParams.name" (ngModelChange)="applyFilter()"
+          placeholder="Name">
+      </mat-form-field>
+
+      <!-- Episode -->
+      <mat-form-field appearance="outline">
+        <mat-label>Episode</mat-label>
+        <input matInput type="text" name="episode" [(ngModel)]="formParams.episode" (ngModelChange)="applyFilter()"
+          placeholder="Episode">
+      </mat-form-field>
+
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,45 @@
+<mat-progress-spinner *ngIf="loading" mode="indeterminate"></mat-progress-spinner>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="episodes?.results">
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element"> {{ element.id }} </td>
+    </ng-container>
+
+    <!-- Episode Column -->
+    <ng-container matColumnDef="episode">
+      <th mat-header-cell *matHeaderCellDef> Episode </th>
+      <td mat-cell *matCellDef="let element"> {{ element.episode }} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{ element.name }} </td>
+    </ng-container>
+
+    <!-- Air Date Column -->
+    <ng-container matColumnDef="air_date">
+      <th mat-header-cell *matHeaderCellDef> Air Date </th>
+      <td mat-cell *matCellDef="let element"> {{element.air_date}} </td>
+    </ng-container>
+
+    <!-- Characters Column -->
+    <ng-container matColumnDef="characters">
+      <th mat-header-cell *matHeaderCellDef> Characters </th>
+      <td mat-cell *matCellDef="let element">
+        <button (click)="characters(element)" mat-stroked-button color="primary">Characters</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [length]="episodes?.info.count" [pageSize]="20" (page)="pageEvent = $event; loadTable();"
+    showFirstLastButtons>
+  </mat-paginator>
+</div>

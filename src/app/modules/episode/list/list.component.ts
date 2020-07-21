@@ -1,0 +1,68 @@
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
+import { EpisodeService } from '../../../core/http';
+import { Subscription } from 'rxjs';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { finalize } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
+import { CharactersComponent } from '../characters/characters.component';
+@Component({
+  selector: 'app-list',
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.scss'],
+})
+export class ListComponent implements OnInit, OnDestroy, OnChanges {
+  constructor(
+    private episodeService: EpisodeService,
+    public dialog: MatDialog
+  ) {}
+
+  displayedColumns = ['id', 'episode', 'name', 'air_date', 'characters'];
+
+  episodes = null;
+  subscription: Subscription = null;
+  loading = false;
+  pageEvent: PageEvent;
+  @Input() request = {};
+
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+
+  ngOnInit(): void {
+    this.loadTable();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.request.currentValue !== changes.request.previousValue) {
+      this.loadTable();
+    }
+  }
+
+  loadTable(): void {
+    this.loading = true;
+    this.episodes = null;
+    this.subscription = this.episodeService
+      .episodes(this.request, this.pageEvent)
+      .pipe(finalize(() => (this.loading = false)))
+      .subscribe((response) => {
+        this.episodes = response;
+        this.loading = false;
+      });
+  }
+
+  characters(episode): void {
+    this.dialog.open(CharactersComponent, {
+      data: episode,
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+}
