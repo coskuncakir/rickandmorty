@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { finalize } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
-import { CharactersComponent } from '../characters/characters.component';
+import { CharactersDialogComponent } from 'src/app/shared/components/characters-dialog/characters-dialog.component';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -57,8 +57,11 @@ export class ListComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   characters(episode): void {
-    this.dialog.open(CharactersComponent, {
-      data: episode,
+    this.dialog.open(CharactersDialogComponent, {
+      data: {
+        characters: episode.characters,
+        title: `${episode.episode} Characters`,
+      },
     });
   }
 

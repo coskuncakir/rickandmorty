@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 // Components
 import { HeaderComponent } from './components/header/header.component';
+import { CharactersDialogComponent } from './components/characters-dialog/characters-dialog.component';
 
 // Material
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -23,7 +24,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
-  declarations: [HeaderComponent],
+  declarations: [HeaderComponent, CharactersDialogComponent],
   imports: [
     // Modules
     CommonModule,
@@ -52,6 +53,7 @@ import { MatBadgeModule } from '@angular/material/badge';
     FormsModule,
     // Components
     HeaderComponent,
+    CharactersDialogComponent,
     // Material
     MatToolbarModule,
     MatIconModule,

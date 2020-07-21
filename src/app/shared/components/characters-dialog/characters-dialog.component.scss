@@ -5,9 +5,9 @@
 }
 
 .mat-card {
-  min-width: 400px;
   margin-bottom: 16px;
   cursor: pointer;
+  padding-bottom: 0;
 
   &:hover {
     background: #f5f5f5;

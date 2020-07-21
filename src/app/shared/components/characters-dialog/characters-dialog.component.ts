@@ -5,21 +5,21 @@ import { from } from 'rxjs';
 import { concatMap, take } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-residents',
-  templateUrl: './residents.component.html',
-  styleUrls: ['./residents.component.scss'],
+  selector: 'app-characters-dialog',
+  templateUrl: './characters-dialog.component.html',
+  styleUrls: ['./characters-dialog.component.scss'],
 })
-export class ResidentsComponent implements OnInit {
+export class CharactersDialogComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data,
     private characterService: CharacterService
   ) {}
 
   loading = true;
-  residents = [];
+  characters = [];
 
   ngOnInit(): void {
-    const residentIds: number[] = this.data.residents.map(
+    const residentIds: number[] = this.data.characters.map(
       (item) => item.split('character/')[1]
     );
     let reqCount = 0;
@@ -27,7 +27,7 @@ export class ResidentsComponent implements OnInit {
       .pipe(concatMap((i) => this.characterService.character(i)))
       .subscribe((resident) => {
         reqCount++;
-        this.residents.push(resident);
+        this.characters.push(resident);
         if (reqCount === residentIds.length) {
           this.loading = false;
         }

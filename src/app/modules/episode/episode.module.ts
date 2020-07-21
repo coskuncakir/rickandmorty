@@ -5,15 +5,9 @@ import { LocationRoutingModule } from './episode-routing.module';
 import { EpisodeComponent } from './episode.component';
 import { ListComponent } from './list/list.component';
 import { FilterComponent } from './filter/filter.component';
-import { CharactersComponent } from './characters/characters.component';
 
 @NgModule({
-  declarations: [
-    EpisodeComponent,
-    ListComponent,
-    FilterComponent,
-    CharactersComponent,
-  ],
+  declarations: [EpisodeComponent, ListComponent, FilterComponent],
   imports: [SharedModule, LocationRoutingModule],
 })
 export class EpisodeModule {}

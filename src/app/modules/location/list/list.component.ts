@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { finalize } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
-import { ResidentsComponent } from '../residents/residents.component';
+import { CharactersDialogComponent } from '../../../shared/components/characters-dialog/characters-dialog.component';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -57,8 +57,11 @@ export class ListComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   residents(location): void {
-    this.dialog.open(ResidentsComponent, {
-      data: location,
+    this.dialog.open(CharactersDialogComponent, {
+      data: {
+        characters: location.residents,
+        title: `${location.name} Residents`,
+      },
     });
   }
 
