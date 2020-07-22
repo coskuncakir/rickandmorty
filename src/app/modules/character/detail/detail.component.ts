@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CharacterService, EpisodeService } from '@app/core/http';
 import { take, finalize, concatMap } from 'rxjs/operators';
 import { from } from 'rxjs';
@@ -11,6 +11,7 @@ import { from } from 'rxjs';
 export class DetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private characterService: CharacterService,
     private episodeService: EpisodeService
   ) {}
@@ -48,5 +49,9 @@ export class DetailComponent implements OnInit {
           this.loading = false;
         }
       });
+  }
+
+  goToEpisodeDetail(episodeId: number): void {
+    this.router.navigate(['/episode/', episodeId]);
   }
 }

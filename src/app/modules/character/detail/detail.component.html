@@ -26,7 +26,9 @@
     <div class="row">
       <div class="col-lg-12">
         <mat-list role="list">
-          <mat-list-item *ngFor="let episode of episodes" role="listitem">{{ episode.episode }}: {{ episode.name }}
+          <mat-list-item *ngFor="let episode of episodes" role="listitem">
+            <button (click)="goToEpisodeDetail(episode.id)" mat-button color="primary">{{ episode.episode }}:
+              {{ episode.name }}</button>
           </mat-list-item>
         </mat-list>
       </div>

@@ -23,8 +23,6 @@
 </div>
 
 
-<mat-card>
-  <mat-paginator [length]="characters?.info.count" [pageSize]="20" (page)="pageEvent = $event; loadTable();"
-    showFirstLastButtons>
-  </mat-paginator>
-</mat-card>
+<mat-paginator [length]="characters?.info.count" [pageSize]="20" (page)="pageEvent = $event; loadTable();"
+  showFirstLastButtons>
+</mat-paginator>
