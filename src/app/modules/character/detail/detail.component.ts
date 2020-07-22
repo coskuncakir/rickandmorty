@@ -54,4 +54,9 @@ export class DetailComponent implements OnInit {
   goToEpisodeDetail(episodeId: number): void {
     this.router.navigate(['/episode/', episodeId]);
   }
+
+  goToLocationDetail(locationUrl: string): void {
+    const locationId = locationUrl.split('location/')[1];
+    this.router.navigate(['/location/', locationId]);
+  }
 }

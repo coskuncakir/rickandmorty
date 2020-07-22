@@ -16,7 +16,10 @@
           <mat-list-item role="listitem">Species: {{ character.species }}</mat-list-item>
           <mat-list-item *ngIf="character.type" role="listitem">Type: {{ character.type }}</mat-list-item>
           <mat-list-item role="listitem">Origin: {{ character.origin.name }}</mat-list-item>
-          <mat-list-item role="listitem">Location: {{ character.location.name }}</mat-list-item>
+          <mat-list-item role="listitem">
+            Location: <a mat-button color="primary"
+              (click)="goToLocationDetail(character.location.url)">{{ character.location.name }}</a>
+          </mat-list-item>
         </mat-list>
       </div>
     </div>
