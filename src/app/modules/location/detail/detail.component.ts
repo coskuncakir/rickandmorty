@@ -31,7 +31,11 @@ export class DetailComponent implements OnInit {
       .pipe(take(1))
       .subscribe((location) => {
         this.location = location;
-        this.getResidents(location.residents);
+        if (location.residents.length > 0) {
+          this.getResidents(location.residents);
+        } else {
+          this.loading = false;
+        }
       });
   }
 

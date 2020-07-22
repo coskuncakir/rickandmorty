@@ -7,7 +7,7 @@
   <mat-divider></mat-divider>
   <mat-card>
     <h2>Location Residents</h2>
-    <div class="row">
+    <div *ngIf="characters.length > 0; else notFound" class="row">
       <div class="col-lg-12" *ngFor="let item of characters">
         <mat-card class="character" (click)="goToCharacterDetail(item.id)">
           <mat-card-header>
@@ -20,3 +20,7 @@
     </div>
   </mat-card>
 </div>
+
+<ng-template #notFound>
+  <p>No data found</p>
+</ng-template>
