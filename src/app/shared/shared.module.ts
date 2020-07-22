@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { CharactersDialogComponent } from './components/characters-dialog/characters-dialog.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 // Material
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -28,7 +29,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 
 @NgModule({
-  declarations: [HeaderComponent, CharactersDialogComponent, FooterComponent],
+  declarations: [
+    HeaderComponent,
+    CharactersDialogComponent,
+    FooterComponent,
+    NotFoundComponent,
+  ],
   imports: [
     // Modules
     CommonModule,
@@ -61,6 +67,7 @@ import { MatListModule } from '@angular/material/list';
     // Components
     HeaderComponent,
     FooterComponent,
+    NotFoundComponent,
     CharactersDialogComponent,
     // Material
     MatToolbarModule,

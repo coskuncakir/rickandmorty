@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CharacterService, EpisodeService } from '@app/core/http';
-import { take, finalize, concatMap } from 'rxjs/operators';
+import { take, concatMap } from 'rxjs/operators';
 import { from } from 'rxjs';
 @Component({
   selector: 'app-detail',
