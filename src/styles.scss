@@ -34,3 +34,23 @@ body {
 .mat-card {
   margin-bottom: 24px;
 }
+
+span.status {
+  &-alive {
+    height: 8px;
+    width: 8px;
+    margin-right: 4px;
+    background: rgb(85, 204, 68);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  &-dead {
+    height: 8px;
+    width: 8px;
+    margin-right: 4px;
+    background: rgb(214, 61, 46);
+    border-radius: 50%;
+    display: inline-block;
+  }
+}

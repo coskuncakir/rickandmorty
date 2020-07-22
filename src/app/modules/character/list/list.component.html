@@ -8,11 +8,13 @@
       <mat-card-header>
         <img mat-card-avatar [src]="item.image" [alt]="item.name">
         <mat-card-title>{{ item.name }}</mat-card-title>
-        <mat-card-subtitle>{{ item.species }} - {{ item.gender}}</mat-card-subtitle>
+        <mat-card-subtitle>
+          <span [ngClass]="item.status === 'Alive' ? 'status-alive' : 'status-dead'"></span>
+          {{ item.status }} - {{ item.species }}
+        </mat-card-subtitle>
       </mat-card-header>
       <mat-divider></mat-divider>
       <mat-card-content>
-        <p>Status: {{ item.status }}</p>
         <p>Origin: {{ item.origin.name }}</p>
         <p>Location: {{ item.location.name }}</p>
         <p *ngIf="item.type">Type: {{ item.type }}</p>

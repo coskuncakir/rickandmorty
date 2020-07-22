@@ -7,7 +7,6 @@ import {
   IResCharacters,
   IResCharacter,
 } from './character.interface';
-import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
