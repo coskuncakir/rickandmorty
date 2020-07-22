@@ -1,12 +1,4 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  ViewChild,
-  Input,
-  OnChanges,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { CharacterService } from '../../../core/http';
 import { Subscription } from 'rxjs';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
@@ -18,7 +10,7 @@ import { finalize } from 'rxjs/operators';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
-export class ListComponent implements OnInit, OnDestroy, OnChanges {
+export class ListComponent implements OnInit, OnDestroy {
   constructor(
     private characterService: CharacterService,
     public dialog: MatDialog
@@ -28,18 +20,12 @@ export class ListComponent implements OnInit, OnDestroy, OnChanges {
   subscription: Subscription = null;
   loading = false;
   pageEvent: PageEvent;
-  @Input() request = {};
+  request = {};
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   ngOnInit(): void {
     this.loadTable();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.request.currentValue !== changes.request.previousValue) {
-      this.loadTable();
-    }
   }
 
   loadTable(): void {
@@ -58,6 +44,14 @@ export class ListComponent implements OnInit, OnDestroy, OnChanges {
     this.dialog.open(DetailComponent, {
       data: item,
     });
+  }
+
+  applyFilter(event: Event): void {
+    this.request = event;
+    if (this.pageEvent) {
+      this.paginator.firstPage();
+    }
+    this.loadTable();
   }
 
   ngOnDestroy(): void {
