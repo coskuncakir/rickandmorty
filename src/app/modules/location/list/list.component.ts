@@ -66,5 +66,6 @@ export class ListComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    this.dialog.closeAll();
   }
 }

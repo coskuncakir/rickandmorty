@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CharacterService } from 'src/app/core/http';
 import { from } from 'rxjs';
 import { concatMap, take } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-characters-dialog',
@@ -12,7 +13,8 @@ import { concatMap, take } from 'rxjs/operators';
 export class CharactersDialogComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data,
-    private characterService: CharacterService
+    private characterService: CharacterService,
+    private router: Router
   ) {}
 
   loading = true;
@@ -34,7 +36,7 @@ export class CharactersDialogComponent implements OnInit {
       });
   }
 
-  goToCharacterDetail(): void {
-    // TODO
+  goToCharacterDetail(characterId: number): void {
+    this.router.navigate(['/character/', characterId]);
   }
 }
