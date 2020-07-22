@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 // Components
 import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 import { CharactersDialogComponent } from './components/characters-dialog/characters-dialog.component';
 
 // Material
@@ -27,7 +28,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 
 @NgModule({
-  declarations: [HeaderComponent, CharactersDialogComponent],
+  declarations: [HeaderComponent, CharactersDialogComponent, FooterComponent],
   imports: [
     // Modules
     CommonModule,
@@ -59,6 +60,7 @@ import { MatListModule } from '@angular/material/list';
     FormsModule,
     // Components
     HeaderComponent,
+    FooterComponent,
     CharactersDialogComponent,
     // Material
     MatToolbarModule,
