@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { CharacterService } from '../../../core/http';
-import { Subscription } from 'rxjs';
+import { CharacterService, EpisodeService } from '../../../core/http';
+import { Subscription, from } from 'rxjs';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
-import { finalize } from 'rxjs/operators';
+import { finalize, concatMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-list',
@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class ListComponent implements OnInit, OnDestroy {
   constructor(
     private characterService: CharacterService,
+    private episodeService: EpisodeService,
     public dialog: MatDialog,
     private router: Router
   ) {}
@@ -36,8 +37,25 @@ export class ListComponent implements OnInit, OnDestroy {
       .characters(this.request, this.pageEvent)
       .pipe(finalize(() => (this.loading = false)))
       .subscribe((response) => {
-        this.characters = response;
-        this.loading = false;
+        const firstEpisodes = [];
+        response.results.forEach((item, index, arr) => {
+          const locationId = item.location.url.split('location/')[1];
+          const firstEpisode = item.episode[0].split('episode/')[1];
+          arr[index].location.url = locationId;
+          arr[index].firstEpisode = firstEpisode;
+          firstEpisodes.push(firstEpisode);
+        });
+        let reqCount = 0;
+        from(firstEpisodes)
+          .pipe(concatMap((i) => this.episodeService.episode(i)))
+          .subscribe((episode) => {
+            response.results[reqCount].firstSeenIn = episode.name;
+            reqCount++;
+            if (reqCount === firstEpisodes.length) {
+              this.loading = false;
+              this.characters = response;
+            }
+          });
       });
   }
 

@@ -24,6 +24,8 @@ export interface IResCharacter {
   image: string;
   episode: string[];
   url: string;
+  firstSeenIn: string;
+  firstEpisode: string;
   created: string;
 }
 export interface IResCharacters {
