@@ -12,12 +12,10 @@ const routes: Routes = [
   {
     path: 'list',
     component: ListComponent,
-    pathMatch: 'full',
   },
   {
     path: ':characterId',
     component: DetailComponent,
-    pathMatch: 'full',
   },
 ];
 
