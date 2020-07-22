@@ -1,11 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LocationComponent } from './location.component';
+import { ListComponent } from './list/list.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: LocationComponent,
+    redirectTo: 'list',
+    pathMatch: 'full',
+  },
+  {
+    path: 'list',
+    component: ListComponent,
   },
 ];
 
