@@ -1,7 +1,35 @@
-<h1 mat-dialog-title>{{ data.name }}</h1>
-<div mat-dialog-content>
-  <img [src]="data.image" [alt]="data.name">
-</div>
-<div mat-dialog-actions>
-  <button mat-button mat-dialog-close>Close</button>
+<mat-progress-spinner *ngIf="loading" mode="indeterminate"></mat-progress-spinner>
+
+<div *ngIf="!loading">
+  <h1>{{ character.name }}</h1>
+  <mat-divider></mat-divider>
+  <mat-card>
+    <div class="row">
+      <div class="col-lg-4">
+        <img [src]="character.image" [alt]="character.name" />
+      </div>
+      <div class="col-lg-8">
+        <h2>Character Info</h2>
+        <mat-list role="list">
+          <mat-list-item role="listitem">Status: {{ character.status }}</mat-list-item>
+          <mat-list-item role="listitem">Gender: {{ character.gender }}</mat-list-item>
+          <mat-list-item role="listitem">Species: {{ character.species }}</mat-list-item>
+          <mat-list-item *ngIf="character.type" role="listitem">Type: {{ character.type }}</mat-list-item>
+          <mat-list-item role="listitem">Origin: {{ character.origin.name }}</mat-list-item>
+          <mat-list-item role="listitem">Location: {{ character.location.name }}</mat-list-item>
+        </mat-list>
+      </div>
+    </div>
+  </mat-card>
+  <mat-card>
+    <h2>{{ character.name }}'s Episodes</h2>
+    <div class="row">
+      <div class="col-lg-12">
+        <mat-list role="list">
+          <mat-list-item *ngFor="let episode of episodes" role="listitem">{{ episode.episode }}: {{ episode.name }}
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </div>
+  </mat-card>
 </div>

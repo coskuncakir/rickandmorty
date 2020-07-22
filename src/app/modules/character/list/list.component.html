@@ -4,9 +4,9 @@
 
 <div *ngIf="characters?.results" class="row">
   <div class="col-lg-4 col-xl-3 col-md-6 character" *ngFor="let item of characters.results">
-    <mat-card>
+    <mat-card (click)="detail(item.id)">
       <mat-card-header>
-        <img (click)="detail(item)" mat-card-avatar [src]="item.image" [alt]="item.name">
+        <img mat-card-avatar [src]="item.image" [alt]="item.name">
         <mat-card-title>{{ item.name }}</mat-card-title>
         <mat-card-subtitle>{{ item.species }} - {{ item.gender}}</mat-card-subtitle>
       </mat-card-header>

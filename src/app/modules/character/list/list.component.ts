@@ -3,8 +3,8 @@ import { CharacterService } from '../../../core/http';
 import { Subscription } from 'rxjs';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
-import { DetailComponent } from '../detail/detail.component';
 import { finalize } from 'rxjs/operators';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -13,7 +13,8 @@ import { finalize } from 'rxjs/operators';
 export class ListComponent implements OnInit, OnDestroy {
   constructor(
     private characterService: CharacterService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router
   ) {}
 
   characters = null;
@@ -40,10 +41,8 @@ export class ListComponent implements OnInit, OnDestroy {
       });
   }
 
-  detail(item: any): void {
-    this.dialog.open(DetailComponent, {
-      data: item,
-    });
+  detail(characterId: number): void {
+    this.router.navigate(['/character/', characterId]);
   }
 
   applyFilter(event: Event): void {

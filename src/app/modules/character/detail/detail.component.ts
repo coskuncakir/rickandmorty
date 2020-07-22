@@ -1,11 +1,52 @@
-import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { CharacterService, EpisodeService } from '@app/core/http';
+import { take, finalize, concatMap } from 'rxjs/operators';
+import { from } from 'rxjs';
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss'],
 })
-export class DetailComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data) {}
+export class DetailComponent implements OnInit {
+  constructor(
+    private route: ActivatedRoute,
+    private characterService: CharacterService,
+    private episodeService: EpisodeService
+  ) {}
+
+  characterId = +this.route.snapshot.paramMap.get('characterId');
+  loading = true;
+  character = null;
+  episodes = [];
+
+  ngOnInit(): void {
+    this.getCharacter();
+  }
+
+  getCharacter(): void {
+    this.characterService
+      .character(this.characterId)
+      .pipe(take(1))
+      .subscribe((character) => {
+        this.character = character;
+        this.getEpisodes(character.episode);
+      });
+  }
+
+  getEpisodes(episodes): void {
+    const episodeIds: number[] = episodes.map(
+      (item) => item.split('episode/')[1]
+    );
+    let reqCount = 0;
+    from(episodeIds)
+      .pipe(concatMap((i) => this.episodeService.episode(i)))
+      .subscribe((resident) => {
+        reqCount++;
+        this.episodes.push(resident);
+        if (reqCount === episodeIds.length) {
+          this.loading = false;
+        }
+      });
+  }
 }
