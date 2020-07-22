@@ -4,9 +4,10 @@ import { LocationRoutingModule } from './location-routing.module';
 
 import { ListComponent } from './list/list.component';
 import { FilterComponent } from './filter/filter.component';
+import { DetailComponent } from './detail/detail.component';
 
 @NgModule({
-  declarations: [ListComponent, FilterComponent],
+  declarations: [ListComponent, FilterComponent, DetailComponent],
   imports: [SharedModule, LocationRoutingModule],
 })
 export class LocationModule {}
