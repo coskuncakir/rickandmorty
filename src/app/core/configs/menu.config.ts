@@ -1,4 +1,4 @@
-export const MENU = [
+export const menuConfig = [
   {
     name: 'Characters',
     path: '/character',

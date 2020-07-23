@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CharacterService, EpisodeService } from '@app/core/http';
+import { CharacterService, EpisodeService } from '@core/http';
 import { take, concatMap } from 'rxjs/operators';
 import { from } from 'rxjs';
+import { TitleService } from '@app/core/services';
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
@@ -13,7 +14,8 @@ export class DetailComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private characterService: CharacterService,
-    private episodeService: EpisodeService
+    private episodeService: EpisodeService,
+    private titleService: TitleService
   ) {}
 
   characterId = +this.route.snapshot.paramMap.get('characterId');
@@ -31,6 +33,7 @@ export class DetailComponent implements OnInit {
       .pipe(take(1))
       .subscribe((character) => {
         this.character = character;
+        this.titleService.setTitle(character.name);
         this.getEpisodes(character.episode);
       });
   }

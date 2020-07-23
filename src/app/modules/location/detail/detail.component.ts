@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CharacterService, LocationService } from '@app/core/http';
 import { take, concatMap } from 'rxjs/operators';
 import { from } from 'rxjs';
+import { TitleService } from '@core/services';
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
@@ -13,7 +14,8 @@ export class DetailComponent implements OnInit {
     private route: ActivatedRoute,
     private characterService: CharacterService,
     private locationService: LocationService,
-    private router: Router
+    private router: Router,
+    private titleService: TitleService
   ) {}
 
   locationId = +this.route.snapshot.paramMap.get('locationId');
@@ -31,6 +33,7 @@ export class DetailComponent implements OnInit {
       .pipe(take(1))
       .subscribe((location) => {
         this.location = location;
+        this.titleService.setTitle(location.name);
         if (location.residents.length > 0) {
           this.getResidents(location.residents);
         } else {

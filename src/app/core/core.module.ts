@@ -1,10 +1,10 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { GlobalErrorHandler } from './services/global-error-handler.service';
+import { GlobalErrorHandler } from './services';
 import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MENU } from './configs';
+import { menuConfig, systemConfig } from './configs';
 
 @NgModule({
   imports: [HttpClientModule, BrowserAnimationsModule, MatSnackBarModule],
@@ -16,7 +16,8 @@ import { MENU } from './configs';
       useClass: HttpErrorInterceptor,
       multi: true,
     },
-    { provide: 'MENU', useValue: MENU },
+    { provide: 'menuConfig', useValue: menuConfig },
+    { provide: 'systemConfig', useValue: systemConfig },
   ],
 })
 export class CoreModule {}

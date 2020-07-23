@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { CharacterService, EpisodeService } from '../../../core/http';
+import { CharacterService, EpisodeService } from '@core/http';
 import { Subscription, from } from 'rxjs';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';

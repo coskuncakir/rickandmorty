@@ -12,6 +12,9 @@ const routes: Routes = [
   {
     path: 'list',
     component: ListComponent,
+    data: {
+      title: 'Episodes',
+    },
   },
   {
     path: ':episodeId',

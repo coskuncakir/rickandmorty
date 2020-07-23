@@ -6,7 +6,7 @@ import { Component, OnInit, Inject } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(@Inject('MENU') public MENU) {}
+  constructor(@Inject('menuConfig') public MENU) {}
 
   ngOnInit(): void {}
 }

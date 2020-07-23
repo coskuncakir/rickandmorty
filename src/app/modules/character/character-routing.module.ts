@@ -12,10 +12,16 @@ const routes: Routes = [
   {
     path: 'list',
     component: ListComponent,
+    data: {
+      title: 'Characters',
+    },
   },
   {
     path: ':characterId',
     component: DetailComponent,
+    data: {
+      title: 'Characters',
+    },
   },
 ];
 
