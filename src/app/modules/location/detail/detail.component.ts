@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CharacterService, LocationService } from '@app/core/http';
+import { CharacterService, LocationService } from '@core/http';
 import { take, concatMap } from 'rxjs/operators';
 import { from } from 'rxjs';
 import { TitleService } from '@core/services';

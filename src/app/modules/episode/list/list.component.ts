@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { EpisodeService } from '../../../core/http';
+import { EpisodeService } from '@core/http';
 import { Subscription } from 'rxjs';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { finalize } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
-import { CharactersDialogComponent } from 'src/app/shared/components/characters-dialog/characters-dialog.component';
+import { CharactersDialogComponent } from '@shared/components/characters-dialog/characters-dialog.component';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
