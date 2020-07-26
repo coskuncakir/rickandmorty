@@ -18,7 +18,7 @@
           </mat-card-header>
           <mat-card-content>
             <p>Last known location:<br>
-              <a mat-button color="primary" [routerLink]="['/location', item.location.url]">{{ item.location.name }}</a>
+              <a mat-button color="primary" [routerLink]="['/location', item.locationId]">{{ item.location.name }}</a>
             </p>
             <p>First seen in:<br>
               <a mat-button color="primary" [routerLink]="['/episode', item.firstEpisode]">{{ item.firstSeenIn }}</a>

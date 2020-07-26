@@ -23,6 +23,7 @@
     "@angular/router": "~10.0.4",
     "@angular/service-worker": "~10.0.4",
     "@ngneat/until-destroy": "^7.3.2",
+    "ngx-cacheable": "^1.4.2",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"

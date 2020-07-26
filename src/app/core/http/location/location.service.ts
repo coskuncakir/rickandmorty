@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '@environments/environment';
+import { Cacheable } from 'ngx-cacheable';
 import {
   IReqLocations,
   IResLocations,
@@ -13,6 +14,7 @@ import {
 export class LocationService {
   constructor(protected http: HttpClient) {}
 
+  @Cacheable()
   locations(request: IReqLocations, params: any): Observable<IResLocations> {
     const url = environment.api + '/location/';
     const httpParams = {
@@ -29,6 +31,7 @@ export class LocationService {
     return this.http.get<IResLocations>(url, httpParams);
   }
 
+  @Cacheable()
   location(locationId: number): Observable<IResLocation> {
     const url = environment.api + `/location/${locationId}`;
     return this.http.get<IResLocation>(url);

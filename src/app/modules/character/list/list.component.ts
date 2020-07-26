@@ -42,12 +42,15 @@ export class ListComponent implements OnInit {
       .subscribe((response) => {
         const firstEpisodes = [];
         response.results.forEach((item, index, arr) => {
-          const locationId = item.location.url.split('location/')[1];
-          const firstEpisode = item.episode[0].split('episode/')[1];
-          arr[index].location.url = locationId;
-          arr[index].firstEpisode = firstEpisode;
-          firstEpisodes.push(firstEpisode);
+          if (item.location.url) {
+            const locationId = item.location.url.split('location/')[1];
+            const firstEpisode = item.episode[0].split('episode/')[1];
+            arr[index].locationId = locationId;
+            arr[index].firstEpisode = firstEpisode;
+            firstEpisodes.push(firstEpisode);
+          }
         });
+
         let reqCount = 0;
         from(firstEpisodes)
           .pipe(concatMap((i) => this.episodeService.episode(i)))

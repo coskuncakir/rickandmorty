@@ -26,6 +26,7 @@ export interface IResCharacter {
   url: string;
   firstSeenIn: string;
   firstEpisode: string;
+  locationId: string;
   created: string;
 }
 export interface IResCharacters {

@@ -2,17 +2,20 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '@environments/environment';
+import { Cacheable } from 'ngx-cacheable';
 import {
   IReqCharacters,
   IResCharacters,
   IResCharacter,
 } from './character.interface';
+
 @Injectable({
   providedIn: 'root',
 })
 export class CharacterService {
   constructor(protected http: HttpClient) {}
 
+  @Cacheable()
   characters(request: IReqCharacters, params: any): Observable<IResCharacters> {
     const url = environment.api + '/character/';
 
@@ -29,6 +32,7 @@ export class CharacterService {
     return this.http.get<IResCharacters>(url, httpParams);
   }
 
+  @Cacheable()
   character(characterId: number): Observable<IResCharacter> {
     const url = environment.api + `/character/${characterId}`;
     return this.http.get<IResCharacter>(url);
