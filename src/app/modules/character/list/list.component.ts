@@ -1,16 +1,19 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CharacterService, EpisodeService } from '@core/http';
-import { Subscription, from } from 'rxjs';
+import { from } from 'rxjs';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { finalize, concatMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+
+@UntilDestroy()
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
-export class ListComponent implements OnInit, OnDestroy {
+export class ListComponent implements OnInit {
   constructor(
     private characterService: CharacterService,
     private episodeService: EpisodeService,
@@ -19,7 +22,6 @@ export class ListComponent implements OnInit, OnDestroy {
   ) {}
 
   characters = null;
-  subscription: Subscription = null;
   loading = false;
   pageEvent: PageEvent;
   request = {};
@@ -33,9 +35,10 @@ export class ListComponent implements OnInit, OnDestroy {
   loadTable(): void {
     this.loading = true;
     this.characters = null;
-    this.subscription = this.characterService
+    this.characterService
       .characters(this.request, this.pageEvent)
       .pipe(finalize(() => (this.loading = false)))
+      .pipe(untilDestroyed(this))
       .subscribe((response) => {
         const firstEpisodes = [];
         response.results.forEach((item, index, arr) => {
@@ -48,6 +51,7 @@ export class ListComponent implements OnInit, OnDestroy {
         let reqCount = 0;
         from(firstEpisodes)
           .pipe(concatMap((i) => this.episodeService.episode(i)))
+          .pipe(untilDestroyed(this))
           .subscribe((episode) => {
             response.results[reqCount].firstSeenIn = episode.name;
             reqCount++;
@@ -69,9 +73,5 @@ export class ListComponent implements OnInit, OnDestroy {
       this.paginator.firstPage();
     }
     this.loadTable();
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 }

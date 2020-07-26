@@ -4,7 +4,9 @@ import { CharacterService } from 'src/app/core/http';
 import { from } from 'rxjs';
 import { concatMap, take } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'app-characters-dialog',
   templateUrl: './characters-dialog.component.html',
@@ -27,6 +29,7 @@ export class CharactersDialogComponent implements OnInit {
     let reqCount = 0;
     from(residentIds)
       .pipe(concatMap((i) => this.characterService.character(i)))
+      .pipe(untilDestroyed(this))
       .subscribe((resident) => {
         reqCount++;
         this.characters.push(resident);

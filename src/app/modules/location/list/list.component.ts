@@ -1,10 +1,12 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { LocationService } from '@core/http';
-import { Subscription } from 'rxjs';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { finalize } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { CharactersDialogComponent } from '@shared/components/characters-dialog/characters-dialog.component';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+
+@UntilDestroy()
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -19,7 +21,6 @@ export class ListComponent implements OnInit, OnDestroy {
   displayedColumns = ['id', 'name', 'type', 'dimension', 'residents'];
 
   locations = null;
-  subscription: Subscription = null;
   loading = false;
   pageEvent: PageEvent;
   request = {};
@@ -33,9 +34,10 @@ export class ListComponent implements OnInit, OnDestroy {
   loadTable(): void {
     this.loading = true;
     this.locations = null;
-    this.subscription = this.locationService
+    this.locationService
       .locations(this.request, this.pageEvent)
       .pipe(finalize(() => (this.loading = false)))
+      .pipe(untilDestroyed(this))
       .subscribe((response) => {
         this.locations = response;
         this.loading = false;
@@ -60,7 +62,6 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
     this.dialog.closeAll();
   }
 }

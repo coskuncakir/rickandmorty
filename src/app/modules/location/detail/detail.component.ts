@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CharacterService, LocationService } from '@core/http';
-import { take, concatMap } from 'rxjs/operators';
+import { concatMap } from 'rxjs/operators';
 import { from } from 'rxjs';
 import { TitleService } from '@core/services';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+
+@UntilDestroy()
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
@@ -30,7 +33,7 @@ export class DetailComponent implements OnInit {
   getEpisode(): void {
     this.locationService
       .location(this.locationId)
-      .pipe(take(1))
+      .pipe(untilDestroyed(this))
       .subscribe((location) => {
         this.location = location;
         this.titleService.setTitle(location.name);
@@ -49,6 +52,7 @@ export class DetailComponent implements OnInit {
     let reqCount = 0;
     from(residentIds)
       .pipe(concatMap((i) => this.characterService.character(i)))
+      .pipe(untilDestroyed(this))
       .subscribe((resident) => {
         reqCount++;
         this.characters.push(resident);
