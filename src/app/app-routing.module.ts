@@ -5,8 +5,8 @@ import { NotFoundComponent } from './shared/components/not-found/not-found.compo
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () =>
-      import('./modules/home/home.module').then((m) => m.HomeModule),
+    redirectTo: 'character',
+    pathMatch: 'full',
   },
   {
     path: 'character',
