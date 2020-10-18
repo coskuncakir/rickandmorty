@@ -1,6 +1,6 @@
 # Rick And Morty Angular Frontend App
 
-[Rick And Morty Angular Frontend App](https://rickandmorty-angular.vercel.app) is an frontend app developed with angular 10 using [rickandmortyapi.com](https://rickandmortyapi.com) rest apis.
+[Rick And Morty Angular Frontend App](https://rickandmorty-angular.vercel.app) is an frontend app that I developed with angular 10 using [rickandmortyapi.com](https://rickandmortyapi.com) rest APIs.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.3.
 
